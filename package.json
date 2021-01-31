@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/VyrekXD",
   "author": "Vyrek",
-  "license": "ISC",
+  "license": "Apache License v2.0",
   "dependencies": {
     "canvas": "^2.6.1",
     "gif-encoder-2": "^1.0.5"
