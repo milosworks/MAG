@@ -1,0 +1,31 @@
+{
+  "name": "make-a-gif",
+  "version": "1.0.0",
+  "description": "A module to create a gif with urls/buffers/paths",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gif",
+    "create-gif",
+    "gif-encoder",
+    "create-gifs",
+    "gifs",
+    "easy-gifs"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/VyrekXD/MAG"
+  },
+  "homepage": "https://github.com/VyrekXD",
+  "author": "Vyrek",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "gif-encoder-2": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.22"
+  }
+}
