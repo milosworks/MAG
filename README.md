@@ -76,3 +76,25 @@ message.channel.send(image)
 <p align="center">
 <img src="https://cdn.discordapp.com/attachments/803346384144433154/805488370926354464/file.gif" />
 </p>
+
+### Eris
+
+```js
+// Import the module
+import { Gif } from 'make-a-gif'
+//Create the pre gif with the options you want
+const PreGif = new Gif()
+//Set the colors that you want
+    .setColors("#3F71C8", "#FF0000", "#00FF00")
+//If u want a different delay put in here
+    .setDelay(1550)
+//We create the gif
+const gif = await PreGif.create()
+//and unlike in Discord.js we don't create an attachment here, we add it in the createMessage options
+message.channel.createMessage('\u200b', { file: gif, name: 'file.gif' })
+```
+
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/803024756865237016/805501067324162088/file.gif" />
+</p>
+
