@@ -1,15 +1,14 @@
 import * as GIFEncoder from 'gif-encoder-2'
 import { createCanvas, loadImage } from 'canvas'
-import { GifError, GifWarning } from './GifClasses'
+import { GifError, GifWarning } from './GifClasses.js'
 
 export class Gif {
-    height: number
-    width: number
-    delay: number
-    imagesArray: string[] | Buffer[]
-    colorsArray: string[]
-    background: string | undefined
-    constructor(width: number = 500, height: number = 500) {
+    /**
+     * Create a new gif
+     * @param {number} width - The width of the gif
+     * @param {number} height - The heigth of the gif
+     */
+    constructor(width = 500, height = 500) {
         if (!width) throw new GifError(`The width of the gif cant be undefined`)
         if (!height) throw new GifError(`The height of the gif cant be undefined`)
 
@@ -22,9 +21,9 @@ export class Gif {
     }
     /**
      * This function is only for the gifs that uses images not colors, makes the background of the gif with a color
-     * @param color - The color of the background
+     * @param {string} color - The color of the background
      */
-    setBackground(color: string) {
+    setBackground(color) {
         if (!color) throw new GifError(`You need to put a valid color`)
 
         this.background = color
@@ -33,9 +32,9 @@ export class Gif {
     }
     /**
      * Set the delay between the images
-     * @param delay - The delay between the images
+     * @param {number} delay - The delay between the images
      */
-    setDelay(delay: number) {
+    setDelay(delay) {
         if (!delay) throw new GifError(`You need to put a delay`)
 
         this.delay = delay
@@ -68,9 +67,10 @@ export class Gif {
     }
     /**
      * Create the gif with the options that you give
+     * @returns {Promise<Buffer>}
      * @async
      */
-    async create(): Promise<Buffer> {
+    async create() {
         const canvas = createCanvas(this.width, this.height),
             ctx = canvas.getContext('2d'),
             encoder = new GIFEncoder(this.width, this.height)

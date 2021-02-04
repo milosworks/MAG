@@ -6,7 +6,7 @@ export class GifError extends Error {
      * @param m - The message to send to the error
      * @private
      */
-    constructor(m: string) {
+    constructor(m) {
         super()
 
         this.message = m
@@ -15,7 +15,7 @@ export class GifError extends Error {
 }
 
 export class GifWarning {
-    constructor(m: string) {
+    constructor(m) {
         emitWarning(m, `GifWarning`)
     }
 }
