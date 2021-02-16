@@ -58,7 +58,7 @@ const gif = new Gif(600, 700)
 
 ```js
 //Import the module
-import { Gif } from 'make-a-gif'
+import Gif from 'make-a-gif'
 //Create the pre gif with the options you want
 const PreGif = new Gif()
 //Set the colors that you want
@@ -81,7 +81,7 @@ message.channel.send(image)
 
 ```js
 // Import the module
-import { Gif } from 'make-a-gif'
+import Gif from 'make-a-gif'
 //Create the pre gif with the options you want
 const PreGif = new Gif()
 //Set the colors that you want
