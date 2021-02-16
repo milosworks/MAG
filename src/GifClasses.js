@@ -1,6 +1,6 @@
-import { emitWarning } from "process"
+const { emitWarning } = require('process')
 
-export class GifError extends Error {
+module.exports = class GifError extends Error {
     /**
      * The error of MAG
      * @param m - The message to send to the error
@@ -14,7 +14,7 @@ export class GifError extends Error {
     }
 }
 
-export class GifWarning {
+module.exports = class GifWarning {
     constructor(m) {
         emitWarning(m, `GifWarning`)
     }

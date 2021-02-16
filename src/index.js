@@ -1,8 +1,8 @@
-import * as GIFEncoder from 'gif-encoder-2'
-import { createCanvas, loadImage } from 'canvas'
-import { GifError, GifWarning } from './GifClasses.js'
+const { createCanvas, loadImage } = require('canvas'),
+    { GifError, GifWarning } = require('./GifClasses'),
+    GIFEncoder = require('gif-encoder-2')
 
-export class Gif {
+module.exports = class Gif {
     /**
      * Create a new gif
      * @param {number} width - The width of the gif
