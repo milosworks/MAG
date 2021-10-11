@@ -16,6 +16,7 @@ export class Gif {
 	height: number
 	delay: number
 	quality: number
+	repeat: boolean
 	frames: Frame[]
 
 	/**
@@ -37,6 +38,7 @@ export class Gif {
 		this.height = ~~height ?? 500
 		this.delay = 500
 		this.quality = 10
+		this.repeat = true
 		this.frames = []
 	}
 
@@ -122,6 +124,13 @@ export class Gif {
 		return this
 	}
 
+	/**
+	 * Set to true to repeat, false to not repeat
+	 */
+	setRepeat(v: boolean) {
+		this.repeat = v ?? !this.repeat
+	}
+
 	async render(): Promise<Buffer | void> {
 		if (!this.frames.length)
 			throw new MAGError('There is no frames to make a gif')
@@ -131,6 +140,7 @@ export class Gif {
 		const encoder = new GIFEncoder(this.width, this.height)
 
 		encoder.start()
+		encoder.setRepeat(this.repeat ? 0 : -1)
 		encoder.setDelay(this.delay)
 		encoder.setQuality(this.quality)
 
