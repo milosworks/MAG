@@ -45,12 +45,12 @@ const gif = new Gif(600, 700)
 
 ### Methods
 
-|    Method    | Parameter |                 Description                  |        Default         |
-| :----------: | :-------: | :------------------------------------------: | :--------------------: | ----------------------------------------------------------------- | --- |
-|  `setDelay`  |  number   |       Set the delay between the frames       |          500           |
-| `setQuality` |  number   |      Set the quality of the gif, max 10      |           10           |
-| `setFrames`  |   Image   |                    Frame                     | Array\<Image \| Frame> | The array of the images on the gif, [see interfaces](#interfaces) | n/a |
-|   `render`   |    n/a    | Renderizes the gif, returns a promise buffer |          n/a           |
+|    Method    | Parameter |                 Description                  | Default |
+| :----------: | :-------: | :------------------------------------------: | :-----: |
+|  `setDelay`  |  number   |       Set the delay between the frames       |   500   |
+| `setQuality` |  number   |      Set the quality of the gif, max 10      |   10    |
+| `setFrames`  |   Image   |          Set the frames of the gif           |   []    |
+|   `render`   |    n/a    | Renderizes the gif, returns a promise buffer |   n/a   |
 
 ### Interfaces
 
