@@ -1,6 +1,1 @@
-.vscode
 node_modules
-.npm
-logs
-*.log
-npm-debug.log*
