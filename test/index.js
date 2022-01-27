@@ -18,11 +18,11 @@ const __dirname = dirname(__filename)
 	const Image = new Gif(500, 500)
 		//This is the delay between frames
 		.setDelay(1500)
+		.setRepeat(0)
 		//We set 3 images that will be 3 frames
 		.setFrames([
-			'https://vyrekxd.is-inside.me/GFlSMu1U.png',
-			'https://vyrekxd.is-inside.me/CCtuX9pK.png',
-			'https://vyrekxd.is-inside.me/Y6WwerwW.png'
+			'https://im7.ezgif.com/tmp/ezgif-7-e66d442ea9-gif-im/frame_00_delay-0.1s.gif',
+			'https://im7.ezgif.com/tmp/ezgif-7-e66d442ea9-gif-im/frame_04_delay-0.1s.gif',
 		])
 
 	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
