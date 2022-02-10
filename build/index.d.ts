@@ -26,5 +26,6 @@ export declare class Gif {
      * Set the frame of the gif
      */
     setFrames(frame: Frame | Image | Frame[] | Image[]): Gif;
+    setRepeat(repeat: number): Gif;
     render(): Promise<Buffer | void>;
 }

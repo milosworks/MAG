@@ -8,6 +8,7 @@ export class Gif {
     delay;
     quality;
     frames;
+    repeat;
     /**
      * Create a new gif
      */
@@ -31,6 +32,14 @@ export class Gif {
         this.delay = 500;
         this.quality = 10;
         this.frames = [];
+        this.repeat = true;
+    }
+    /**
+     * Whether the gif repeats
+     */
+    setRepeat(repeat) {
+        this.repeat = repeat;
+        return this;
     }
     /**
      * The delay between frames
@@ -105,6 +114,7 @@ export class Gif {
         encoder.start();
         encoder.setDelay(this.delay);
         encoder.setQuality(this.quality);
+        encoder.setRepeat(this.repeat);
         for (const Frame of this.frames) {
             if (typeof Frame.src === 'string' && Frame.src.match(HexRegex)) {
                 ctx.fillStyle = Frame.src;
