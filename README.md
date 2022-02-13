@@ -1,5 +1,3 @@
-**CREATIING V3**
-
 # MAG (make-a-gif)
 
 Make gifs easier
