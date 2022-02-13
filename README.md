@@ -1,4 +1,3 @@
-
 **CREATIING V3**
 
 # MAG (make-a-gif)
@@ -48,12 +47,14 @@ const gif = new Gif(600, 700)
 
 ### Methods
 
-|    Method    | Parameter |                 Description                  | Default |
-| :----------: | :-------: | :------------------------------------------: | :-----: |
-|  `setDelay`  |  number   |       Set the delay between the frames       |   500   |
-| `setQuality` |  number   |      Set the quality of the gif, max 10      |   10    |
-| `setFrames`  |   Image   |          Set the frames of the gif           |   []    |
-|   `render`   |    n/a    | Renderizes the gif, returns a promise buffer |   n/a   |
+|     Method      | Parameter |                     Description                      | Default |
+| :-------------: | :-------: | :--------------------------------------------------: | :-----: |
+|   `setDelay`    |  number   |           Set the delay between the frames           |   500   |
+|  `setQuality`   |  number   |          Set the quality of the gif, max 10          |   10    |
+|   `setFrames`   |   Image   |              Set the frames of the gif               |   []    |
+|   `setRepeat`   |  boolean  |             Set if the gif should repeat             |  true   |
+| `setSkipOnFail` |  boolean  | Set if a frame should be skipped if it gave an error |  true   |
+|    `render`     |    n/a    |     Renderizes the gif, returns a promise buffer     |   n/a   |
 
 ### Interfaces
 
@@ -75,9 +76,10 @@ import { fileURLToPath } from 'url'
 import { join, dirname } from 'path'
 
 //Import fs to write the gif maked, this step is optional
-import fs from 'fs'
+import fs from 'fs/promises'
 
 //This is for get the dirname
+// @ts-ignore
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -89,13 +91,14 @@ const __dirname = dirname(__filename)
 		.setDelay(1500)
 		//We set 3 images that will be 3 frames
 		.setFrames([
-			'https://vyrekxd.is-inside.me/GFlSMu1U.png',
-			'https://vyrekxd.is-inside.me/CCtuX9pK.png',
-			'https://vyrekxd.is-inside.me/Y6WwerwW.png'
+			'https://i.imgur.com/QnaDhkD.png',
+			'https://i.imgur.com/8bazwQp.png',
+			'https://i.imgur.com/wPMwvr5.png'
 		])
 
 	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
-	const Render = await Image.render()
+	const Render = await Image.render().catch((e) => console.error(e))
+	if (!Render) return
 
 	//Writes the gif in this folder
 	await fs.writeFile(join(__dirname, 'make-a-gif.gif'), Render)
@@ -116,18 +119,19 @@ import { Gif } from 'make-a-gif'
 		.setDelay(1500)
 		//We set 3 images that will be 3 frames
 		.setFrames([
-			'https://vyrekxd.is-inside.me/GFlSMu1U.png',
-			'https://vyrekxd.is-inside.me/CCtuX9pK.png',
-			'https://vyrekxd.is-inside.me/Y6WwerwW.png'
+			'https://i.imgur.com/QnaDhkD.png',
+			'https://i.imgur.com/8bazwQp.png',
+			'https://i.imgur.com/wPMwvr5.png'
 		])
 
 	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
-	const Render = await Image.render()
+	const Render = await Image.render().catch((e) => console.error(e))
+	if (!Render) return
 
 	//Create the attachment
 	const image = new Discord.MessageAttachment(Render, 'file.gif')
 	//Send it
-	message.channel.send(image)
+	message.channel.send({ attachments: [image] })
 })()
 ```
 

@@ -132,6 +132,7 @@ export class Gif {
 	setRepeat(v: boolean) {
 		this.repeat = v ?? !this.repeat
 	}
+
 	/**
 	 * Set to true to skip frame on fetch error, false to throw error on fetch error
 	 */
