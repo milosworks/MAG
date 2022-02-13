@@ -66,7 +66,8 @@ export class Gif {
 			throw new MAGError('The quality needs to be a number')
 		if (quality <= 0)
 			throw new MAGError('The quality cannot be less than 0')
-		if (quality >= 10) throw new MAGError('Quality 10 is the max')
+		if (quality > 10) 
+			throw new MAGError('Quality 10 is the max')
 
 		this.quality = quality
 
