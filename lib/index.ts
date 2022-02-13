@@ -18,6 +18,7 @@ export class Gif {
 	quality: number
 	repeat: boolean
 	frames: Frame[]
+	skipOnFail: boolean
 
 	/**
 	 * Create a new gif
@@ -40,6 +41,7 @@ export class Gif {
 		this.quality = 10
 		this.repeat = true
 		this.frames = []
+		this.skipOnFail = true
 	}
 
 	/**
@@ -176,12 +178,14 @@ export class Gif {
 						)
 					}
 				} else {
-					const Image = await canvas.loadImage(Frame.src)
-					.catch(e => {
-						if (!this.skipOnFail) throw e;
-						ctx.clearRect(0, 0, Canvas.width, Canvas.height)
-						continue;
-					})
+					const Image = await canvas
+						.loadImage(Frame.src)
+						.catch((e) => {
+							if (!this.skipOnFail) throw e
+							ctx.clearRect(0, 0, Canvas.width, Canvas.height)
+							return null
+						})
+					if (!Image) continue
 
 					ctx.drawImage(Image, 0, 0, Canvas.width, Canvas.height)
 				}
