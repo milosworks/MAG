@@ -130,6 +130,12 @@ export class Gif {
 	setRepeat(v: boolean) {
 		this.repeat = v ?? !this.repeat
 	}
+	/**
+	 * Set to true to skip frame on fetch error, false to throw error on fetch error
+	 */
+	setSkipOnFail(v: boolean) {
+		this.skipOnFail = v ?? !this.skipOnFail
+	}
 
 	async render(): Promise<Buffer | void> {
 		if (!this.frames.length)
@@ -171,6 +177,11 @@ export class Gif {
 					}
 				} else {
 					const Image = await canvas.loadImage(Frame.src)
+					.catch(e => {
+						if (!this.skipOnFail) throw e;
+						ctx.clearRect(0, 0, Canvas.width, Canvas.height)
+						continue;
+					})
 
 					ctx.drawImage(Image, 0, 0, Canvas.width, Canvas.height)
 				}
