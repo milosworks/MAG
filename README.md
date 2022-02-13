@@ -95,7 +95,7 @@ const __dirname = dirname(__filename)
 	const Render = await Image.render()
 
 	//Writes the gif in this folder
-	fs.writeFileSync(join(__dirname, 'make-a-gif.gif'), Render)
+	await fs.writeFile(join(__dirname, 'make-a-gif.gif'), Render)
 })()
 ```
 
