@@ -5,9 +5,8 @@
 		"lib": ["DOM"],
 		"outDir": "./build",
 		"rootDir": "./lib",
-		"declaration": true,
+		"removeComments": true,
 		"strict": true,
-		"strictFunctionTypes": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
@@ -17,7 +16,5 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true
-	},
-	"include": ["lib"],
-	"exclude": ["test"]
+	}
 }

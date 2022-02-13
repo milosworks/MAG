@@ -7,11 +7,8 @@ export class Gif {
     height;
     delay;
     quality;
-    frames;
     repeat;
-    /**
-     * Create a new gif
-     */
+    frames;
     constructor(width = 500, height = 500) {
         if (!width)
             throw new MAGError('You need to put the width of the gif');
@@ -27,23 +24,13 @@ export class Gif {
             throw new MAGError('The height needs to be a number');
         if (height <= 0)
             throw new MAGError('The height cant be iqual or less than 0');
-        this.width = ~~width;
-        this.height = ~~height;
+        this.width = ~~width ?? 500;
+        this.height = ~~height ?? 500;
         this.delay = 500;
         this.quality = 10;
-        this.frames = [];
         this.repeat = true;
+        this.frames = [];
     }
-    /**
-     * Whether the gif repeats
-     */
-    setRepeat(repeat) {
-        this.repeat = repeat;
-        return this;
-    }
-    /**
-     * The delay between frames
-     */
     setDelay(delay) {
         if (!delay)
             throw new MAGError('You need to put the delay between frames');
@@ -54,9 +41,6 @@ export class Gif {
         this.delay = ~~delay;
         return this;
     }
-    /**
-     * The quality of the gif
-     */
     setQuality(quality) {
         if (!quality)
             throw new MAGError('You need to put the quality between images');
@@ -64,14 +48,11 @@ export class Gif {
             throw new MAGError('The quality needs to be a number');
         if (quality <= 0)
             throw new MAGError('The quality cannot be less than 0');
-        if (quality >= 10)
+        if (quality > 10)
             throw new MAGError('Quality 10 is the max');
         this.quality = quality;
         return this;
     }
-    /**
-     * Set the frame of the gif
-     */
     setFrames(frame) {
         if (!frame)
             throw new MAGError(`You need to put the frame object, a string, a array or a buffer; recieved a ${typeof frame}`);
@@ -105,6 +86,9 @@ export class Gif {
         }
         return this;
     }
+    setRepeat(v) {
+        this.repeat = v ?? !this.repeat;
+    }
     async render() {
         if (!this.frames.length)
             throw new MAGError('There is no frames to make a gif');
@@ -112,9 +96,9 @@ export class Gif {
         const ctx = Canvas.getContext('2d');
         const encoder = new GIFEncoder(this.width, this.height);
         encoder.start();
+        encoder.setRepeat(this.repeat ? 0 : -1);
         encoder.setDelay(this.delay);
         encoder.setQuality(this.quality);
-        encoder.setRepeat(this.repeat);
         for (const Frame of this.frames) {
             if (typeof Frame.src === 'string' && Frame.src.match(HexRegex)) {
                 ctx.fillStyle = Frame.src;

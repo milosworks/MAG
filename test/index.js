@@ -6,9 +6,10 @@ import { fileURLToPath } from 'url'
 import { join, dirname } from 'path'
 
 //Import fs to write the gif maked, this step is optional
-import fs from 'fs'
+import fs from 'fs/promises'
 
 //This is for get the dirname
+// @ts-ignore
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -21,13 +22,15 @@ const __dirname = dirname(__filename)
 		.setRepeat(0)
 		//We set 3 images that will be 3 frames
 		.setFrames([
-			'https://im7.ezgif.com/tmp/ezgif-7-e66d442ea9-gif-im/frame_00_delay-0.1s.gif',
-			'https://im7.ezgif.com/tmp/ezgif-7-e66d442ea9-gif-im/frame_04_delay-0.1s.gif',
+			'https://i.imgur.com/QnaDhkD.png',
+			'https://i.imgur.com/8bazwQp.png',
+			'https://i.imgur.com/wPMwvr5.png'
 		])
 
 	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
-	const Render = await Image.render()
+	const Render = await Image.render().catch((e) => console.error(e))
+	if (!Render) return
 
 	//Writes the gif in this folder
-	fs.writeFileSync(join(__dirname, 'make-a-gif.gif'), Render)
+	await fs.writeFile(join(__dirname, 'make-a-gif.gif'), Render)
 })()
