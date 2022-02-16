@@ -147,6 +147,7 @@ export class Gif {
 		const Canvas = canvas.createCanvas(this.width, this.height)
 		const ctx = Canvas.getContext('2d')
 		const encoder = new GIFEncoder(this.width, this.height)
+		const promises = [];
 
 		encoder.start()
 		encoder.setRepeat(this.repeat ? 0 : -1)
@@ -166,37 +167,24 @@ export class Gif {
 						ctx.fillStyle = Frame.background
 						ctx.fillRect(0, 0, Canvas.width, Canvas.height)
 					} else {
-						const BackgroundImage = await canvas.loadImage(
-							Frame.background
-						)
-
-						ctx.drawImage(
-							BackgroundImage,
-							0,
-							0,
-							Canvas.width,
-							Canvas.height
-						)
+						promises.push(canvas.loadImage(Frame.background))
 					}
 				} else {
-					const Image = await canvas
-						.loadImage(Frame.src)
-						.catch((e) => {
-							if (!this.skipOnFail) throw e
-							ctx.clearRect(0, 0, Canvas.width, Canvas.height)
-							return null
-						})
-					if (!Image) continue
-
-					ctx.drawImage(Image, 0, 0, Canvas.width, Canvas.height)
+					promises.push(canvas.loadImage(Frame.src).catch((e) => {
+						if (!this.skipOnFail) throw e
+						ctx.clearRect(0, 0, Canvas.width, Canvas.height)
+						return null
+					}))
 				}
 			}
-
-			encoder.addFrame(ctx as CanvasRenderingContext2D)
-
-			ctx.clearRect(0, 0, Canvas.width, Canvas.height)
 		}
 
+		let Images = await Promise.all(promises)
+		Images = Images.filter(Boolean)
+		for (const Image of Images) {
+			ctx.drawImage(Image, 0, 0, Canvas.width, Canvas.height)
+			encoder.addFrame(ctx)
+			ctx.clearRect(0, 0, Canvas.width, Canvas.height)
+		}
 		return encoder.out.getData()
 	}
-}
