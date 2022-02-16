@@ -129,15 +129,17 @@ export class Gif {
 	/**
 	 * Set to true to repeat, false to not repeat
 	 */
-	setRepeat(v: boolean) {
+	setRepeat(v: boolean): Gif {
 		this.repeat = v ?? !this.repeat
+		return this
 	}
 
 	/**
 	 * Set to true to skip frame on fetch error, false to throw error on fetch error
 	 */
-	setSkipOnFail(v: boolean) {
+	setSkipOnFail(v: boolean): Gif {
 		this.skipOnFail = v ?? !this.skipOnFail
+		return this
 	}
 
 	async render(): Promise<Buffer | void> {
