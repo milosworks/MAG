@@ -1,12 +1,7 @@
 {
 	"name": "make-a-gif",
-<<<<<<< HEAD
 	"version": "3.0.0",
 	"description": "A pure typescript module to create a gif in the easiest way possible.",
-=======
-	"version": "3.0.1",
-	"description": "A module to create a gif with urls/buffers/paths",
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 	"main": "build/index.js",
 	"type": "module",
 	"scripts": {
@@ -30,14 +25,7 @@
 	"author": "Vyrek",
 	"license": "Apache-2.0",
 	"dependencies": {
-<<<<<<< HEAD
-		"@types/node": "^17.0.23",
-		"imagescript": "github:matmen/ImageScript",
-		"node-fetch": "^3.2.3"
-=======
-		"canvas": "^2.9.0",
-		"gifencoder": "^2.0.1"
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
+		"imagescript": "github:matmen/ImageScript"
 	},
 	"devDependencies": {
 		"typescript": "^4.6.3"
