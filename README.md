@@ -45,23 +45,12 @@ const gif = new Gif(600, 700, 1)
 
 ### Methods
 
-<<<<<<< HEAD
 |   Method    |   Parameter   |                         Description                         | Default |
 | :---------: | :-----------: | :---------------------------------------------------------: | :-----: |
 | `setLoops`  |    number     | The number of loops the gif will play, -1 is infinite loops |   -1    |
 | `setFrames` | Frame/Frame[] |                    Set frames to the gif                    |   n/a   |
 | `addFrame`  |     Frame     |                   Add a frame to the gif                    |   n/a   |
 |  `decode`   |      n/a      |      Renderizes the gif, returns a promise Uint8Array       |   n/a   |
-=======
-|     Method      | Parameter |                     Description                      | Default |
-| :-------------: | :-------: | :--------------------------------------------------: | :-----: |
-|   `setDelay`    |  number   |           Set the delay between the frames           |   500   |
-|  `setQuality`   |  number   |          Set the quality of the gif, max 10          |   10    |
-|   `setFrames`   |   Image   |              Set the frames of the gif               |   []    |
-|   `setRepeat`   |  boolean  |             Set if the gif should repeat             |  true   |
-| `setSkipOnFail` |  boolean  | Set if a frame should be skipped if it gave an error |  true   |
-|    `render`     |    n/a    |     Renderizes the gif, returns a promise buffer     |   n/a   |
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 
 ### Interfaces
 
@@ -84,12 +73,9 @@ import { join, dirname } from 'path'
 
 //Import fs to write the gif maked, this step is optional
 import fs from 'fs/promises'
-<<<<<<< HEAD
 
 // To fetch the buffer of an image
 import fetch from 'node-fetch'
-=======
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 
 //This is for get the dirname
 // @ts-ignore
@@ -105,7 +91,6 @@ const __dirname = dirname(__filename)
 	)
 
 	//We instance the class Gif and give the proportions of width 500 and height 500
-<<<<<<< HEAD
 	const myGif = new Gif(500, 500)
 	//We set 3 images that will be 3 frames
 	await myGif.setFrames([
@@ -124,21 +109,6 @@ const __dirname = dirname(__filename)
 
 	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
 	const Render = await myGif.decode()
-=======
-	const Image = new Gif(500, 500)
-		//This is the delay between frames
-		.setDelay(1500)
-		//We set 3 images that will be 3 frames
-		.setFrames([
-			'https://i.imgur.com/QnaDhkD.png',
-			'https://i.imgur.com/8bazwQp.png',
-			'https://i.imgur.com/wPMwvr5.png'
-		])
-
-	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
-	const Render = await Image.render().catch((e) => console.error(e))
-	if (!Render) return
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 
 	//Writes the gif in this folder
 	await fs.writeFile(join(__dirname, 'make-a-gif.gif'), Render)
@@ -163,7 +133,6 @@ import fetch from 'node-fetch'
 	)
 
 	//We instance the class Gif and give the proportions of width 500 and height 500
-<<<<<<< HEAD
 	const myGif = new Gif(500, 500)
 	//We set 3 images that will be 3 frames
 	await myGif.setFrames([
@@ -185,26 +154,6 @@ import fetch from 'node-fetch'
 	const attachment = new Discord.MessageAttachment(Buffer.from(render.buffer))
 
 	message.channel.send({ attachments: [attachment] })
-=======
-	const Image = new Gif(500, 500)
-		//This is the delay between frames
-		.setDelay(1500)
-		//We set 3 images that will be 3 frames
-		.setFrames([
-			'https://i.imgur.com/QnaDhkD.png',
-			'https://i.imgur.com/8bazwQp.png',
-			'https://i.imgur.com/wPMwvr5.png'
-		])
-
-	//Render the image, it will return a Buffer or it will give an error if anything goes wrong
-	const Render = await Image.render().catch((e) => console.error(e))
-	if (!Render) return
-
-	//Create the attachment
-	const image = new Discord.MessageAttachment(Render, 'file.gif')
-	//Send it
-	message.channel.send({ attachments: [image] })
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 })()
 ```
 

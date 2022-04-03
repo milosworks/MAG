@@ -24,15 +24,7 @@ interface Frame {
 export class Gif {
 	width: number
 	height: number
-<<<<<<< HEAD
 	private frames: FrameI[]
-=======
-	delay: number
-	quality: number
-	repeat: boolean
-	frames: Frame[]
-	skipOnFail: boolean
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 
 	/**
 	 * The number of loops the gif will play
@@ -65,7 +57,6 @@ export class Gif {
 		this.loops = -1
 		this.quality = quality || 1
 		this.frames = []
-		this.skipOnFail = true
 	}
 
 	/**
@@ -84,23 +75,12 @@ export class Gif {
 	 * Add frames to the gif
 	 * @argument frame - The frames to add
 	 */
-<<<<<<< HEAD
 	async setFrames(frames: Frame | Frame[]) {
 		if (!frames) throw new Error('The frames are required')
 		if (!Array.isArray(frames)) frames = [frames]
 		if (!frames.length) throw new Error('The frames are required')
 		if (frames.length <= 1)
 			throw new Error('You need to add more than one frame')
-=======
-	setQuality(quality: number): Gif {
-		if (!quality)
-			throw new MAGError('You need to put the quality between images')
-		if (isNaN(quality))
-			throw new MAGError('The quality needs to be a number')
-		if (quality <= 0)
-			throw new MAGError('The quality cannot be less than 0')
-		if (quality > 10) throw new MAGError('Quality 10 is the max')
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 
 		for (const frame of frames) {
 			await this.addFrame(frame)
@@ -160,74 +140,6 @@ export class Gif {
 	async decode() {
 		const gif = new GIF(this.frames, this.loops)
 
-<<<<<<< HEAD
 		return gif.encode(this.quality)
-=======
-	/**
-	 * Set to true to skip frame on fetch error, false to throw error on fetch error
-	 */
-	setSkipOnFail(v: boolean) {
-		this.skipOnFail = v ?? !this.skipOnFail
-	}
-
-	async render(): Promise<Buffer | void> {
-		if (!this.frames.length)
-			throw new MAGError('There is no frames to make a gif')
-
-		const Canvas = canvas.createCanvas(this.width, this.height)
-		const ctx = Canvas.getContext('2d')
-		const encoder = new GIFEncoder(this.width, this.height)
-
-		encoder.start()
-		encoder.setRepeat(this.repeat ? 0 : -1)
-		encoder.setDelay(this.delay)
-		encoder.setQuality(this.quality)
-
-		for (const Frame of this.frames) {
-			if (typeof Frame.src === 'string' && Frame.src.match(HexRegex)) {
-				ctx.fillStyle = Frame.src
-				ctx.fillRect(0, 0, Canvas.width, Canvas.height)
-			} else {
-				if (Frame.background) {
-					if (
-						typeof Frame.background === 'string' &&
-						Frame.background.match(HexRegex)
-					) {
-						ctx.fillStyle = Frame.background
-						ctx.fillRect(0, 0, Canvas.width, Canvas.height)
-					} else {
-						const BackgroundImage = await canvas.loadImage(
-							Frame.background
-						)
-
-						ctx.drawImage(
-							BackgroundImage,
-							0,
-							0,
-							Canvas.width,
-							Canvas.height
-						)
-					}
-				} else {
-					const Image = await canvas
-						.loadImage(Frame.src)
-						.catch((e) => {
-							if (!this.skipOnFail) throw e
-							ctx.clearRect(0, 0, Canvas.width, Canvas.height)
-							return null
-						})
-					if (!Image) continue
-
-					ctx.drawImage(Image, 0, 0, Canvas.width, Canvas.height)
-				}
-			}
-
-			encoder.addFrame(ctx as CanvasRenderingContext2D)
-
-			ctx.clearRect(0, 0, Canvas.width, Canvas.height)
-		}
-
-		return encoder.out.getData()
->>>>>>> 5bbdc258e42e1025561e04183d51688ae0be45b7
 	}
 }
