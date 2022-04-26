@@ -1,5 +1,5 @@
+import phin from 'phin'
 import { GIF, Frame as FrameI, decode, Image } from 'imagescript'
-import fetch from 'node-fetch'
 
 import { checkTypes, checkNumber } from './utils/checkTypes.js'
 
@@ -63,7 +63,7 @@ export class Gif {
 	 * 	The number of loops the gif will play
 	 * @default -1 -1 is infinite loops
 	 */
-	setLoops(loops: number) {
+	public setLoops(loops: number) {
 		if (!loops) throw new Error('The loops are required')
 		if (isNaN(loops)) throw new Error('The loops needs to be a number')
 		if (loops <= -1) throw new Error('The loops cant be less than -1')
@@ -75,7 +75,7 @@ export class Gif {
 	 * Add frames to the gif
 	 * @argument frame - The frames to add
 	 */
-	async setFrames(frames: Frame | Frame[]) {
+	public async setFrames(frames: Frame | Frame[]) {
 		if (!frames) throw new Error('The frames are required')
 		if (!Array.isArray(frames)) frames = [frames]
 		if (!frames.length) throw new Error('The frames are required')
@@ -91,20 +91,20 @@ export class Gif {
 	 * Add a frame to the gif
 	 * @argument frame - The frame to add
 	 */
-	async addFrame(frame: Frame) {
+	public async addFrame(frame: Frame) {
 		if (!frame) throw new Error('The frame is required')
 		if (!frame.src) throw new Error('The src is required')
 
 		const img = new Image(this.width, this.height)
 
 		if (typeof frame.background === 'string') {
-			const imageres = await fetch(frame.background)
-			const buf = await imageres.arrayBuffer()
+			const imageres = await phin(frame.background)
+			const buf = Buffer.from(imageres.body)
 			frame.background = new Uint8Array(buf)
 		}
 		if (typeof frame.src === 'string') {
-			const imageres = await fetch(frame.src)
-			const buf = await imageres.arrayBuffer()
+			const imageres = await phin(frame.src)
+			const buf = Buffer.from(imageres.body)
 			frame.src = new Uint8Array(buf)
 		}
 		if (frame.duration && isNaN(frame.duration))
@@ -137,7 +137,7 @@ export class Gif {
 		)
 	}
 
-	async decode() {
+	public async decode() {
 		const gif = new GIF(this.frames, this.loops)
 
 		return gif.encode(this.quality)
