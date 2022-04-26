@@ -50,7 +50,7 @@ const gif = new Gif(600, 700, 1)
 | `setLoops`  |    number     | The number of loops the gif will play, -1 is infinite loops |   -1    |
 | `setFrames` | Frame/Frame[] |                    Set frames to the gif                    |   n/a   |
 | `addFrame`  |     Frame     |                   Add a frame to the gif                    |   n/a   |
-|  `decode`   |      n/a      |      Renderizes the gif, returns a promise Uint8Array       |   n/a   |
+|  `encode`   |      n/a      |      Renderizes the gif, returns a promise Uint8Array       |   n/a   |
 
 ### Interfaces
 

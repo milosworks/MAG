@@ -24,7 +24,7 @@ interface Frame {
 export class Gif {
 	width: number
 	height: number
-	private frames: FrameI[]
+	frames: FrameI[]
 
 	/**
 	 * The number of loops the gif will play
@@ -137,7 +137,7 @@ export class Gif {
 		)
 	}
 
-	public async decode() {
+	public async encode() {
 		const gif = new GIF(this.frames, this.loops)
 
 		return gif.encode(this.quality)
