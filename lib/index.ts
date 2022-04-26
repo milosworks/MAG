@@ -137,9 +137,10 @@ export class Gif {
 		)
 	}
 
-	public async encode() {
+	public async encode(arrayBuffer = false) {
 		const gif = new GIF(this.frames, this.loops)
+		const arrayBuf = await gif.encode(this.quality)
 
-		return gif.encode(this.quality)
+		return arrayBuffer ? arrayBuf : Buffer.from(arrayBuf)
 	}
 }
