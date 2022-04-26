@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Frame as FrameI } from 'imagescript';
 interface Frame {
     src: string | Uint8Array;
@@ -14,6 +15,6 @@ export declare class Gif {
     setLoops(loops: number): void;
     setFrames(frames: Frame | Frame[]): Promise<void>;
     addFrame(frame: Frame): Promise<void>;
-    encode(): Promise<Uint8Array>;
+    encode(arrayBuffer?: boolean): Promise<Uint8Array | Buffer>;
 }
 export {};

@@ -77,8 +77,9 @@ export class Gif {
         img.composite(_img);
         this.frames.push(FrameI.from(img, frame.duration, 0, 0, FrameI.DISPOSAL_BACKGROUND));
     }
-    async encode() {
+    async encode(arrayBuffer = false) {
         const gif = new GIF(this.frames, this.loops);
-        return gif.encode(this.quality);
+        const arrayBuf = await gif.encode(this.quality);
+        return arrayBuffer ? arrayBuf : Buffer.from(arrayBuf);
     }
 }
