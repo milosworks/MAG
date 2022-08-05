@@ -1,36 +1,34 @@
 {
-	"name": "make-a-gif",
-	"version": "4.1.2",
-	"description": "A pure typescript module to create a gif in the easiest way possible.",
-	"main": "build/index.js",
-	"type": "module",
-	"scripts": {
-		"test": "pnpm run build && node test/index.js",
-		"build": "npx tsc",
-		"prepare": "npm run build"
-	},
-	"keywords": [
-		"gif",
-		"create-gif",
-		"gif-encoder",
-		"create-gifs",
-		"gifs",
-		"easy-gifs"
-	],
-	"repository": {
-		"type": "github",
-		"url": "https://github.com/VyrekXD/MAG"
-	},
-	"homepage": "https://github.com/VyrekXD",
-	"author": "Vyrek",
-	"license": "Apache-2.0",
-	"dependencies": {
-		"imagescript": "github:matmen/ImageScript",
-		"phin": "^3.6.1"
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.27",
-		"typescript": "^4.6.3"
-	}
+    "name": "make-a-gif",
+    "version": "4.1.2",
+    "description": "A pure typescript module to create a gif in the easiest way possible.",
+    "main": "build/index.js",
+    "scripts": {
+        "test": "pnpm run build && node test/index.js",
+        "build": "npx tsc",
+        "prepare": "npm run build"
+    },
+    "keywords": [
+        "gif",
+        "create-gif",
+        "gif-encoder",
+        "create-gifs",
+        "gifs",
+        "easy-gifs"
+    ],
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/VyrekXD/MAG"
+    },
+    "homepage": "https://github.com/VyrekXD",
+    "author": "Vyrek",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "imagescript": "github:matmen/ImageScript",
+        "phin": "^3.6.1"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.27",
+        "typescript": "^4.6.3"
+    }
 }
-
